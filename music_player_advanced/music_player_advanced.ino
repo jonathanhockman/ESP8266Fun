@@ -76,22 +76,22 @@ boolean tryCommand(WiFiClient client){
 
     notes = new NOTE[len];
 
-    for(int x = 0; x < len; x++){
+    for(int x = 0; x < len; x++){      
       byte note_len_b = client.read();
       byte n_len = B00111111 & note_len_b;
       byte n_len_multi = B00000011 & (note_len_b >> 6);
 
-      Serial.println(n_len);
-      Serial.println(n_len_multi);
+//      Serial.println(n_len);
+//      Serial.println(n_len_multi);
 
       byte note_b = client.read();
       byte note_index = B00001111 & note_b;
       byte note_shift = B00000111 & (note_b >> 4);
       byte note_shift_n = B00000001 & (note_b >> 7);
 
-      Serial.println(note_index);
-      Serial.println(note_shift);
-      Serial.println(note_shift_n);
+//      Serial.println(note_index);
+//      Serial.println(note_shift);
+//      Serial.println(note_shift_n);
 
       NOTE note;
 
@@ -102,12 +102,12 @@ boolean tryCommand(WiFiClient client){
         note.freq = SCALE[note_index - 1] * (note_shift * (note_shift_n == 0 ? 1 : -1) + 1);
       }
 
-      note.interval = ((n_len_multi + 1) * bpm)/((B0 << 16) | n_len);
+      note.interval = ((n_len_multi + 1) * bpm)/n_len;
 
-      Serial.print("Note: ");
-      Serial.println(note.freq);
-      Serial.print("Interval: ");
-      Serial.println(note.interval);
+//      Serial.print("Note: ");
+//      Serial.println(note.freq);
+//      Serial.print("Interval: ");
+//      Serial.println(note.interval);
 
       notes[x] = note;
     }
