@@ -5,14 +5,10 @@
 
 const char ssid[] = "IKnowWhatYouDidLastSummer";
 const char pass[] = "RollyIsAw3som3";
-const int BUFFER_SIZE = 1024;
 const int LED = 13;
 const int SPEAKER = 15;
 
 const int SCALE[] = {440, 466, 494, 523, 554, 587, 622, 659, 698, 739, 784, 830};
-const byte LOWER_A = 65;
-const byte UPPER_A = 97;
-const byte ZERO = 48;
 
 WiFiServer server(80);
 
@@ -83,17 +79,17 @@ boolean tryCommand(WiFiClient client){
       byte n_len = B00111111 & note_len_b;
       byte n_len_multi = B00000011 & (note_len_b >> 6);
 
-      Serial.println(n_len);
-      Serial.println(n_len_multi);
+//      Serial.println(n_len);
+//      Serial.println(n_len_multi);
 
       byte note_b = client.read();
       byte note_index = B00001111 & note_b;
       byte note_shift = B00000111 & (note_b >> 4);
       byte note_shift_n = B00000001 & (note_b >> 7);
 
-      Serial.println(note_index);
-      Serial.println(note_shift);
-      Serial.println(note_shift_n);
+//      Serial.println(note_index);
+//      Serial.println(note_shift);
+//      Serial.println(note_shift_n);
 
       NOTE note;
 
