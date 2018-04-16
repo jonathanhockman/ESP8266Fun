@@ -3,8 +3,8 @@
 
 // intro to Superman theme [120, 0, 17, 4, 11, 12, 11, 12, 4, 12, 11, 2, 11, 4, 0b00010100, 4, 11, 2, 4, 4, 11, 12, 11, 12, 4, 12, 11, 2, 11, 16, 0b00011000, 8, 0, 16, 0b00010110, 2, 0b00010110]
 
-const char ssid[] = "IKnowWhatYouDidLastSummer";
-const char pass[] = "RollyIsAw3som3";
+const char ssid[] = "<SSID>";
+const char pass[] = "<PASSWORD>";
 const int LED = 13;
 const int SPEAKER = 15;
 
