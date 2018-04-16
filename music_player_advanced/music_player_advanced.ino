@@ -1,13 +1,15 @@
 #include <SPI.h>
 #include <ESP8266WiFi.h>
 
+// intro to Superman theme [120, 0, 17, 4, 11, 12, 11, 12, 4, 12, 11, 2, 11, 4, 0b00010100, 4, 11, 2, 4, 4, 11, 12, 11, 12, 4, 12, 11, 2, 11, 16, 0b00011000, 8, 0, 16, 0b00010110, 2, 0b00010110]
+
 const char ssid[] = "IKnowWhatYouDidLastSummer";
 const char pass[] = "RollyIsAw3som3";
 const int BUFFER_SIZE = 1024;
 const int LED = 13;
 const int SPEAKER = 15;
 
-const int SCALE[] = {440, 493, 523, 587, 659, 698, 783};
+const int SCALE[] = {440, 466, 494, 523, 554, 587, 622, 659, 698, 739, 784, 830};
 const byte LOWER_A = 65;
 const byte UPPER_A = 97;
 const byte ZERO = 48;
@@ -81,17 +83,17 @@ boolean tryCommand(WiFiClient client){
       byte n_len = B00111111 & note_len_b;
       byte n_len_multi = B00000011 & (note_len_b >> 6);
 
-//      Serial.println(n_len);
-//      Serial.println(n_len_multi);
+      Serial.println(n_len);
+      Serial.println(n_len_multi);
 
       byte note_b = client.read();
       byte note_index = B00001111 & note_b;
       byte note_shift = B00000111 & (note_b >> 4);
       byte note_shift_n = B00000001 & (note_b >> 7);
 
-//      Serial.println(note_index);
-//      Serial.println(note_shift);
-//      Serial.println(note_shift_n);
+      Serial.println(note_index);
+      Serial.println(note_shift);
+      Serial.println(note_shift_n);
 
       NOTE note;
 
@@ -178,6 +180,9 @@ void handlePlaySong(){
   }
   else{
     currentTimeLeft -= millis() - lastCheckTime;
+    if(currentTimeLeft < 50) {
+      noTone(SPEAKER); // Create subtle break between notes
+    }
     lastCheckTime = millis();
   }
 }
